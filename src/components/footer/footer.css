@@ -1,0 +1,22 @@
+.footer{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#textmain{
+    font-weight: 600;
+}
+
+#sourcecode{
+    color: blue;
+}
+
+#link{
+    text-decoration: none;
+}
+
+#sourcecode:hover{
+    cursor: pointer;
+}

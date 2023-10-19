@@ -2,7 +2,7 @@
 
 .category-item {
     border: 1px solid var(--pale-blue);
-    box-shadow: 4px 4px 2px var(--mid-gray);
+    /* box-shadow: 4px 4px 2px var(--mid-gray); */
     width: 150px;
     background-color: #f59f18;
     padding: 20px 30px;
@@ -18,13 +18,10 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: bolder;
-   
+
 }
 
 .category-item:hover {
     cursor: pointer;
-    box-shadow: 5px 10px #888888;
-    transition: box-shadow 0.15s linear 1s;
     background-color: #aa3830;
-    color: white;
 }

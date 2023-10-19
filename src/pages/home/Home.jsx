@@ -23,7 +23,7 @@ function Home() {
   },[])
   return (
     <>
-    <div className="container" style={{marginTop:"7rem"}}>
+    <div className="container">
         <div className="row">
           <h2 className="home-title text-center">Welcome to Shop Cart</h2>
           <div

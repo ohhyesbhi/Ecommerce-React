@@ -5,6 +5,8 @@ import ProductList from "../pages/productlist/ProductList"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
 import ProductDetails from "../pages/productdetails/ProductDetails"
+import Login from "../pages/login/Login"
+import SignUp from "../pages/login/Signup"
 
 function MainRoute() {
     return (
@@ -14,9 +16,9 @@ function MainRoute() {
           <Route path='/' element={<App/>} />
            <Route path="/products" element={<ProductList/>} />
           <Route path="/product/:id" element={<ProductDetails/>}/>
-          {/*<Route path="/signin" element={<Login/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
-          <Route path="/cart" element={<Cart/>}/> */}
+         <Route path="/signin" element={<Login/>}/>
+           <Route path="/signup" element={<SignUp/>}/>
+          {/*<Route path="/cart" element={<Cart/>}/> */}
           <Route path="*" element={<Error/>} />
        </Routes>
        <Footer/>

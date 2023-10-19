@@ -1,0 +1,38 @@
+/* .container{
+    height: 55vh;
+} */
+
+.home-title {
+    font-size: 3.5rem;
+    margin-top: 2rem;
+    letter-spacing: 1rem;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.login-wrapper {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.login-wrapper .signup-btn {
+    cursor: pointer;
+    color: black;
+    padding: 1rem;
+}
+
+.login-wrapper .signup-btn:hover {
+    text-decoration: underline;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.login-wrapper h4 {
+    font-size: 2rem;
+    letter-spacing: 4px;
+}

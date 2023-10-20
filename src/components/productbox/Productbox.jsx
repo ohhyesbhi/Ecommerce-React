@@ -8,8 +8,8 @@ function Productbox({productImage,name,price}) {
           <div className="product-img">
             <img src={productImage} alt="" />
           </div>
-          <div className="product-name text-center">{name}</div>
-          <div className="product-price text-center">{price}</div>
+          <div className="product-name text-center">{name.substring(0,15)+"..."}</div>
+          <div className="product-price text-center">{price+"$"}</div>
         </Link>
    </>
   )

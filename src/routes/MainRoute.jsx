@@ -14,7 +14,7 @@ function MainRoute() {
      <Header light={true} expand="md" container="md" color="light" fixed="top"/>
        <Routes>
           <Route path='/' element={<App/>} />
-           <Route path="/products" element={<ProductList/>} />
+           <Route path="/products/:categoryName" element={<ProductList/>} />
           <Route path="/product/:id" element={<ProductDetails/>}/>
          <Route path="/signin" element={<Login/>}/>
            <Route path="/signup" element={<SignUp/>}/>

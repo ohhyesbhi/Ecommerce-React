@@ -7,6 +7,7 @@ import Image from "../../assets/2209_w048_n005_340b_p1_339.jpg"
 
 // css import
 import "./home.css"
+import { Link } from "react-router-dom";
 
 function Home() {
     const [categories,setCategories] = useState([]);
@@ -33,7 +34,7 @@ function Home() {
            >
             <CategoryItem itemName="All Products"  />
             {
-              categories.map((items,i)=> <CategoryItem itemName={items} filter={items} key={i} />)
+              categories.map((items,i)=><CategoryItem itemName={items} filter={items} key={i} />)
             }
            
           </div>

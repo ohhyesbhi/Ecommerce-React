@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./filterproduct.css"
 
 function Filterproduct() {
@@ -20,10 +21,10 @@ function Filterproduct() {
 
         <div className="sidebar-title fw-bold">Categories</div>
         <div id="categoryList">
-         <a className='d-flex text-decoration-none '>Electronics</a>
-         <a className='d-flex text-decoration-none '>Jewelery</a>
-         <a className='d-flex text-decoration-none '>Men clothing</a>
-         <a className='d-flex text-decoration-none '>Women clothing </a>
+        <Link to="/products/electronics" className='d-flex text-decoration-none '>Electronics</Link>
+         <Link to="/products/jewelery" className='d-flex text-decoration-none '>Jewelery</Link>
+         <Link to="/products/men's clothing" className='d-flex text-decoration-none '>Men clothing</Link>
+         <Link to="/products/women's clothing" className='d-flex text-decoration-none '>Women clothing </Link>
 
         </div>
 

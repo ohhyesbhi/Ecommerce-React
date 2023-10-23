@@ -1,13 +1,17 @@
+#productDetailsPage{
+    margin-top: 1rem;
+}
+
 .product-details-wrapper {
     padding-top: 3rem;
 }
 
-.product-img {
+.product-imgg {
     flex-basis: 30%;
-    height: 315px;
+    height: 415px;
 }
 
-.product-img img {
+.product-imgg img {
     width: 85%;
 }
 

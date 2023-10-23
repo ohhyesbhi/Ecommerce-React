@@ -1,25 +1,42 @@
+import { useParams } from "react-router-dom"
 import "./productdetails.css"
+import { useEffect, useState } from "react";
+import { productDetails } from "../../apis/fakestoreApi";
+import axios from "axios";
 
 function ProductDetails() {
+
+    const {id} = useParams();
+    const [pdDetails,setPdDetails] = useState([])
+
+    useEffect(()=>{
+      downloadProductDetails()
+    },[id])
+
+   async function downloadProductDetails(){
+      const response = await axios.get(productDetails(id))
+      setPdDetails(response.data)
+   }
+
   return (
     <>
-    <div id="productDetailsPage"> 
+    <div id="productDetailsPage" > 
      <div className="container">
             <div className="row">
                 <div className="product-details-wrapper d-flex justify-content-between align-items-start flex-row">
-                    <div className="product-img d-flex">
-                        <img src="https://www.aristobrat.in/cdn/shop/products/ClassicShirt_FrenchBlue1_1080x.jpg?v=1667207840" alt="product image" id="product-img"/>
+                    <div className="product-imgg d-flex">
+                        <img src={pdDetails.image} alt="product image" id="product-img"/>
                     </div>
 
                     <div className="product-details-box d-flex flex-column">
                         <div id="productDetails">
                             
-                            <div className="product-name" id="product-name">{/*pdDetails.title*/}</div>
-                            <div className="product-price fw-bold" id="product-price">{/*pdDetails.price*/}</div>
+                            <div className="product-name" id="product-name">{pdDetails.title}</div>
+                            <div className="product-price fw-bold" id="product-price">{pdDetails.price+"$"}</div>
                             <div className="product-description">
-                                <div className="product-description-title fw-bold">{/*pdDetails.title*/}</div>
+                                <div className="product-description-title fw-bold">{pdDetails.title}</div>
                                 <div className="product-description-data" id="product-description-data">
-                                    {/* {pdDetails.description} */}
+                                    {pdDetails.description}
                                 </div>
                             </div>
                         </div>

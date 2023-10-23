@@ -1,72 +1,63 @@
+import { useState } from "react";
+import { useForm } from 'react-hook-form';
+
+function Auth({onSubmit}) {
 
 
-function Auth() {
-
-    // const[formDetails,setFormDetails] = useState({email:"",username:"",password:"",loading:true})
+    const {register,handleSubmit,formState:{errors}} = useForm();
         
-    // function updateUsername(name){
-    //     setFormDetails({...formDetails,username:name,loading:true})
-    // }
-
-    // function updateEmail(emailid){
-    //     setFormDetails({...formDetails,email:emailid,loading:true})
-    // }
-
-    // function updatePassword(pwd){
-    //     setFormDetails({...formDetails,password:pwd,loading:true})
-    // }
-
-    // function handleOnSubmit(){
-    //      setFormDetails({...formDetails,loading:false})
-    //       onSubmit(formDetails)
-
-          
+    function handleOnSubmit(data){
     
-    //     //   setResetSignupFormss(false)
-    // }
-
-    // function reseting(){
-    //     setFormDetails({email:"",username:"",password:"",loading:true})
-    // }
-    //  useEffect(()=>{
-    //     setFormDetails({email:"",username:"",password:"",loading:true})  
-    //  },[])
-
-
-    //  useImperativeHandle(ref,()=>{
-    //     return {
-    //     reseting:()=>setFormDetails({email:"",username:"",password:"",loading:true})
-    //     }
-    //  },[])
+      onSubmit(data)
+   
+    }
 
   return (
     <>
-     <div className="input-group">
-              <input type="text" value=""  className="form-control" placeholder="Username" id="loginUsername"/>
+    <div className="ui main">
+<form className="ui form" onSubmit={handleSubmit(handleOnSubmit)} >
+         <div className="input-group field">
+              <input type="text" name="names"   className="form-control"  placeholder="Username" id="loginUsername"
+            //  onChange={(e)=>updateUsername(e.target.value)} 
+              {...register("names",{ required : true,maxLength:15})}
+              />
           </div>
-       
-            <div className="input-group">
-               <input type="email" value=""  className="form-control" placeholder="email" id="loginemail"/>
-            </div>
 
+          <div>
+            {errors.names && errors.names.type == "required" && <p style={{marginBottom:"0.5rem",color:"red"}}>This field is mandatory </p>}
+            {errors.names && errors.names.type == "maxLength" && <p style={{marginBottom:"0.5rem",color:"red"}}>Name cannot exceed 20 characters</p>}
+          </div>
+        
+          <div className="input-group">
+               <input name="emails" type="email" className="form-control" placeholder="email" id="loginemail"
+               {...register("emails",{required : true , pattern : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i })}
+             //  onChange={(e)=>updateEmail(e.target.value)}
+               />
+               
+          </div>
+
+          <div >
+            {errors.emails && errors.emails.type == "required" && <p style={{marginBottom:"0.5rem",color:"red"}}>This field is mandatory </p>}
+            {errors.emails && errors.emails.type == "pattern" && <p style={{marginBottom:"0.5rem",color:"red"}}>Enter valid email id</p>}
+          </div>
           
           <div className="input-group">
-              <input type="password" value=""  className="form-control" placeholder="Password" id="loginPassword"/>
+              <input name="passwords" type="password"  className="form-control" placeholder="Password" id="loginPassword"
+              {...register("passwords",{required : true , pattern : /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])(?=.*[A-Z])(?=.*\d).{7,}$/i })}
+            //  onChange={(e)=>updateEmail(e.target.value)}
+              />
           </div>
-          <div className="input-group">
-            {/* {
-                formDetails.loading?
-                <button className="form-control btn btn-primary" ref={ref} onClick={()=>handleOnSubmit()}>
-                   Submit
-                </button>
-                :
-                <button  ref={ref} className="form-control btn btn-primary" type="button" disabled>
-                  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                 Loading...
-                </button> 
-            } */}
-              
-            
+
+          <div style={{marginBottom:"1rem"}}>
+          {errors.passwords && errors.passwords.type == "required" && <p style={{marginBottom:"0.5rem",color:"red"}}>This field is mandatory </p>}
+            {errors.passwords && errors.passwords.type == "pattern" && <p style={{marginBottom:"0.5rem",color:"red"}}>Password should contain 7 characters and should include 1 special char,1 number</p>}
+          </div>
+
+          <button  type="submit" className="form-control btn btn-primary ui button blue"  onClick={()=>{handleSubmit(handleOnSubmit)}}>
+           Submit
+          </button>
+         
+          </form>
           </div>
     </>
   )

@@ -17,5 +17,5 @@ export function getParticularCategory(category){
 }
 
 export function signUp(){
-    return 
+    return `${import.meta.env.VITE_FAKE_STORE_URL}/users`;
 }

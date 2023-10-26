@@ -8,15 +8,15 @@ import Footer from "../components/footer/Footer"
 import ProductDetails from "../pages/productdetails/ProductDetails"
 import Login from "../pages/login/Login"
 import SignUp from "../pages/login/Signup"
-import tokenDetails from "../contextApi/context"
+import usercontext from "../contextApi/usercontext"
 
 function MainRoute() {
 
-  const [token,setToken] = useState("")
+   const [user,setUser] = useState(null)
   
     return (
      <>
-     <tokenDetails.Provider value={{token,setToken}}>
+     <usercontext.Provider value={{user,setUser}}>
      <Header light={true} expand="md" container="md" color="light" fixed="top"/>
        <Routes>
           <Route path='/' element={<App/>} />
@@ -28,7 +28,7 @@ function MainRoute() {
           <Route path="*" element={<Error/>} />
        </Routes>
        <Footer/> 
-     </tokenDetails.Provider>
+       </usercontext.Provider>
      </>
     )
   }

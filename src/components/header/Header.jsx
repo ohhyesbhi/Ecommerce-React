@@ -17,15 +17,13 @@ import "./header.css"
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
-
+import usercontext from "../../contextApi/usercontext"
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
   const [token,setToken,removeToken] = useCookies(["jwt-token"]);
-  console.log(token,"jwwwwwwwt")
-
-
-
+  const {user,setUser} = useContext(usercontext)
+  
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -47,7 +45,11 @@ function Header(args) {
                 <DropdownItem divider />
                 {
                   (token["jwt-token"])?<Link to="/signup" style={{textDecoration:"none"}}
-                  onClick={()=>removeToken("jwt-token")}
+                  onClick={()=>{
+                    removeToken("jwt-token")
+                     setUser(null)
+                      }
+                    }
                   >
                      <DropdownItem>Logout</DropdownItem></Link>
                   :
@@ -58,7 +60,7 @@ function Header(args) {
             </UncontrolledDropdown>
           </Nav>
           {
-            (token)?<NavbarText>username</NavbarText>:
+            (user)?<NavbarText>{user.username}</NavbarText>:
             <></>
           }
           

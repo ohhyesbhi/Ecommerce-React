@@ -20,7 +20,8 @@ function Signup() {
                   username : autharguments.names,
                   email : autharguments.emails,
                   password : autharguments.passwords
-                 })  
+                 }) 
+                 
               } catch (error) {
                 console.log(error)
               }

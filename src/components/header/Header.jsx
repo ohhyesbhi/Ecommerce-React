@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -11,13 +11,26 @@ import {
   DropdownItem,
   NavbarText,
 } from 'reactstrap';
+import jwt_decode from "jwt-decode"
 
 // css import
 import "./header.css"
 import { Link } from 'react-router-dom';
+import tokenDetails from '../../contextApi/context';
+
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
+  const {token,setToken} = useContext(tokenDetails);
+
+  let userDetails = ""
+  if(token){
+     userDetails = jwt_decode(token);
+  }
+  
+  console.log(userDetails,"user details")
+
+  
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -35,14 +48,26 @@ function Header(args) {
                 Options
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
+                <DropdownItem>Cart</DropdownItem>
+                <DropdownItem>Settings</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
+                {
+                  (token)?<Link to="/signup" style={{textDecoration:"none"}} onClick={()=>{
+                    localStorage.removeItem("jwt-token")
+                    setToken("")
+                  }}> <DropdownItem>Logout</DropdownItem></Link>
+                  :
+                  <Link to="/signup" style={{textDecoration:"none"}}> <DropdownItem>Signup</DropdownItem></Link>  
+                }
+           
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Username</NavbarText>
+          {
+            (userDetails!="")?<NavbarText>{userDetails.user}</NavbarText>:
+            <></>
+          }
+          
         </Collapse>
       </Navbar>
     </div>

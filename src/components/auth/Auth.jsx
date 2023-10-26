@@ -1,16 +1,18 @@
-import { useState } from "react";
+
 import { useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 
 function Auth({onSubmit}) {
 
-
+    const navigator = useNavigate()
     const {register,handleSubmit,formState:{errors}} = useForm();
         
     function handleOnSubmit(data){
-    
+    console.log(data,"data")
       onSubmit(data)
-   
+      navigator("/signin")
     }
+
 
   return (
     <>
@@ -29,7 +31,7 @@ function Auth({onSubmit}) {
           </div>
         
           <div className="input-group">
-               <input name="emails" type="email" className="form-control" placeholder="email" id="loginemail"
+               <input name="emails"  className="form-control" placeholder="email" id="loginemail"
                {...register("emails",{required : true , pattern : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i })}
              //  onChange={(e)=>updateEmail(e.target.value)}
                />

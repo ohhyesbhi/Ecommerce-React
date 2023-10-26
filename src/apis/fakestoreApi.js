@@ -19,3 +19,7 @@ export function getParticularCategory(category){
 export function signUp(){
     return `${import.meta.env.VITE_FAKE_STORE_URL}/users`;
 }
+
+export function sigin() {
+    return `${import.meta.env.VITE_FAKE_STORE_URL}/auth/login`;
+}

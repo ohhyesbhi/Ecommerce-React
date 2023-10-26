@@ -15,12 +15,16 @@ function Signup() {
             <h4 className="text-center">SignUp</h4>
 
             <Auth onSubmit={async(autharguments)=>{
-                       const response = await axios.post(signUp(),{
-                        username : autharguments.names,
-                        email : autharguments.emails,
-                        password : autharguments.passwords
-                       })  
-                       console.log(response)
+              try {
+                const response = await axios.post(signUp(),{
+                  username : autharguments.names,
+                  email : autharguments.emails,
+                  password : autharguments.passwords
+                 })  
+              } catch (error) {
+                console.log(error)
+              }
+                    
                       }} />
             
             <div className="signup-btn text-center" id="showSignupBtn">

@@ -1,9 +1,14 @@
+import toast from 'react-hot-toast';
+import "./Auth.css"
 
 import { Link } from 'react-router-dom'
 import Auth from '../../components/auth/Auth'
 import Image from "../../assets/wepik-export-20230815191001RxUw.png"
 
-import "./Auth.css"
+
+
+import axios from 'axios'
+import { sigin } from '../../apis/fakestoreApi'
 
 function Login() {
   return (
@@ -16,8 +21,21 @@ function Login() {
           <div style={{width:"100%"}}>
             <h4 className="text-center">Login</h4>
 
-            <Auth onSubmit={(autharguments)=>{
-                       
+            <Auth onSubmit={async(autharguments)=>{
+                    try {
+                      console.log(autharguments,"auth")
+                      const response = await axios.post(sigin(),{
+                        username : autharguments.names,
+                        email : autharguments.emails,
+                        password : autharguments.passwords
+                      })
+                      toast.success("Successfully logged in")
+                      console.log(response,"response")
+                    } catch (error) {
+                      toast.error(error.response.data)
+                       console.log(error)
+                    }   
+                   
             }}/>  
 
             <div className="signup-btn text-center" id="showSignupBtn">

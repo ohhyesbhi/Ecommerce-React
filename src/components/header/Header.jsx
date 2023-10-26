@@ -11,26 +11,20 @@ import {
   DropdownItem,
   NavbarText,
 } from 'reactstrap';
-import jwt_decode from "jwt-decode"
 
 // css import
 import "./header.css"
 import { Link } from 'react-router-dom';
-import tokenDetails from '../../contextApi/context';
+import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
-  const {token,setToken} = useContext(tokenDetails);
+  const [token,setToken,removeToken] = useCookies(["jwt-token"]);
+  console.log(token,"jwwwwwwwt")
 
-  let userDetails = ""
-  if(token){
-     userDetails = jwt_decode(token);
-  }
-  
-  console.log(userDetails,"user details")
 
-  
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -52,10 +46,10 @@ function Header(args) {
                 <DropdownItem>Settings</DropdownItem>
                 <DropdownItem divider />
                 {
-                  (token)?<Link to="/signup" style={{textDecoration:"none"}} onClick={()=>{
-                    localStorage.removeItem("jwt-token")
-                    setToken("")
-                  }}> <DropdownItem>Logout</DropdownItem></Link>
+                  (token["jwt-token"])?<Link to="/signup" style={{textDecoration:"none"}}
+                  onClick={()=>removeToken("jwt-token")}
+                  >
+                     <DropdownItem>Logout</DropdownItem></Link>
                   :
                   <Link to="/signup" style={{textDecoration:"none"}}> <DropdownItem>Signup</DropdownItem></Link>  
                 }
@@ -64,7 +58,7 @@ function Header(args) {
             </UncontrolledDropdown>
           </Nav>
           {
-            (userDetails!="")?<NavbarText>{userDetails.user}</NavbarText>:
+            (token)?<NavbarText>username</NavbarText>:
             <></>
           }
           

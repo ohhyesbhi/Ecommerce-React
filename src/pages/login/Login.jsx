@@ -4,17 +4,18 @@ import "./Auth.css"
 import { Link, useNavigate } from 'react-router-dom'
 import Auth from '../../components/auth/Auth'
 import Image from "../../assets/wepik-export-20230815191001RxUw.png"
-
+import Cookies from 'js-cookie';
 
 
 import axios from 'axios'
 import { sigin } from '../../apis/fakestoreApi'
 import { useContext } from 'react';
 import tokenDetails from '../../contextApi/context';
+import { useCookies } from 'react-cookie';
 
 function Login() {
   const navigator = useNavigate()
-  const {token,setToken} = useContext(tokenDetails)
+  const [token,settoken] = useCookies(['jwt-token'])
   return (
     <>
     <div className="container" style={{marginTop:"8rem"}}>
@@ -34,8 +35,7 @@ function Login() {
                         password : autharguments.passwords
                       })
                       toast.success("Successfully logged in")
-                      localStorage.setItem("jwt-token",response.data.token)
-                      setToken(localStorage.getItem("jwt-token"))
+                      settoken("jwt-token",response.data.token)
                       navigator("/")
                     } catch (error) {
                       toast.error(error.response.data)

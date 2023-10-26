@@ -91,7 +91,7 @@ function ProductList() {
 
   return (
 <>
- <div className="container" style={{marginTop:"1rem"}}>
+ <div className="container" style={{marginTop:"5rem"}}>
     <div className="row">
     <h2 className="product-list-title text-center">{categoryName}</h2>
     {

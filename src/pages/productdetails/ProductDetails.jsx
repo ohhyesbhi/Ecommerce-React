@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import "./productdetails.css"
 import { useEffect, useState } from "react";
 import { productDetails } from "../../apis/fakestoreApi";
 import axios from "axios";
+import cartcontext from "../../contextApi/cartcontext";
+import { useContext } from "react";
 
 function ProductDetails() {
 
     const {id} = useParams();
     const [pdDetails,setPdDetails] = useState([])
+    const {cart,setCart} = useContext(cartcontext) 
 
     useEffect(()=>{
       downloadProductDetails()
@@ -16,6 +19,10 @@ function ProductDetails() {
    async function downloadProductDetails(){
       const response = await axios.get(productDetails(id))
       setPdDetails(response.data)
+   }
+
+   function onAddingProduct(){
+        setCart({...cart, products:[...cart.products,id]})
    }
 
   return (
@@ -41,10 +48,10 @@ function ProductDetails() {
                             </div>
                         </div>
 
-                        <div className="product-details-action btn btn-primary text-decoration-non" >Add to cart</div>
-                        <a href="cart.html" id="goToCartBtn" className="product-details-action btn btn-warning text-decoration-none">
+                        <div className="product-details-action btn btn-primary text-decoration-non" onClick={onAddingProduct}>Add to cart</div>
+                        <Link to="/cart" id="goToCartBtn" className="product-details-action btn btn-warning text-decoration-none">
                             Go to cart
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

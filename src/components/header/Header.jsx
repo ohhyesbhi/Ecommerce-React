@@ -18,11 +18,14 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
 import usercontext from "../../contextApi/usercontext"
+import cartcontext from '../../contextApi/cartcontext';
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
   const [token,setToken,removeToken] = useCookies(["jwt-token"]);
   const {user,setUser} = useContext(usercontext)
+
+  const {cart} = useContext(cartcontext)
   
   const toggle = () => setIsOpen(!isOpen);
 
@@ -40,7 +43,7 @@ function Header(args) {
                 Options
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Cart</DropdownItem>
+                <DropdownItem>Cart   <span style={{color:"red",fontWeight:"bold"}}> {cart.products.length}</span> </DropdownItem>
                 <DropdownItem>Settings</DropdownItem>
                 <DropdownItem divider />
                 {

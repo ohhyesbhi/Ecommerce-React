@@ -1,16 +1,24 @@
-import {useState, useEffect } from "react";
-import { getAllCtegories} from "../../apis/fakestoreApi";
+import {useState, useEffect, useContext } from "react";
 import axios from "axios"
-import CategoryItem from "../../components/categoryitem/Categoryitem";
+// image import
 import Image from "../../assets/2209_w048_n005_340b_p1_339.jpg"
-
-
 // css import
 import "./home.css"
-import { Link } from "react-router-dom";
+// component import
+import useCart from "../../hooks/useCart";
+import usercontext from "../../contextApi/usercontext"
+import CategoryItem from "../../components/categoryitem/Categoryitem";
+import { getAllCtegories} from "../../apis/fakestoreApi";
 
 function Home() {
+
     const [categories,setCategories] = useState([]);
+    const {user,setUser} = useContext(usercontext)
+    const [cart] = useCart(user?user.id:undefined)
+
+    useEffect(()=>{
+      downloadCategories()
+   },[])
 
    async function downloadCategories(){
       const response = await axios.get(getAllCtegories());
@@ -19,9 +27,12 @@ function Home() {
    }
 
 
-  useEffect(()=>{
-     downloadCategories()
-  },[])
+
+ 
+
+
+
+  
   return (
     <>
     <div className="container" style={{marginTop:"3rem"}}>

@@ -1,4 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext,useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import {
   Collapse,
   Navbar,
@@ -11,22 +14,21 @@ import {
   DropdownItem,
   NavbarText,
 } from 'reactstrap';
-
 // css import
 import "./header.css"
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { useCookies } from 'react-cookie';
+// component imports
 import usercontext from "../../contextApi/usercontext"
-import cartcontext from '../../contextApi/cartcontext';
+import useCart from '../../hooks/useCart';
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
   const [token,setToken,removeToken] = useCookies(["jwt-token"]);
-  const {user,setUser} = useContext(usercontext)
 
-  const {cart} = useContext(cartcontext)
+  const {user,setUser} = useContext(usercontext)
+  const [cart,setCart] = useCart(user?user.id:undefined);
   
+  console.log(cart,"cart",user)
+
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -43,7 +45,11 @@ function Header(args) {
                 Options
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Cart   <span style={{color:"red",fontWeight:"bold"}}> {cart.products.length}</span> </DropdownItem>
+                <DropdownItem>
+                    {
+                     user &&  <Link className=' text-decoration-none text-black' to={`/cart/${user.id}`}>Cart   {cart && <span> ({cart.products.length})</span> }</Link>
+                    }
+                </DropdownItem>
                 <DropdownItem>Settings</DropdownItem>
                 <DropdownItem divider />
                 {
@@ -51,6 +57,8 @@ function Header(args) {
                   onClick={()=>{
                     removeToken("jwt-token")
                      setUser(null)
+                     setCart(0)
+                     axios.get(`${import.meta.env.VITE_FAKE_STORE_URL}/logout`,{withCredentials:true})
                       }
                     }
                   >

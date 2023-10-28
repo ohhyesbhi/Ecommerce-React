@@ -1,16 +1,22 @@
 import { Link, useParams } from "react-router-dom"
-import "./productdetails.css"
-import { useEffect, useState } from "react";
-import { productDetails } from "../../apis/fakestoreApi";
-import axios from "axios";
-import cartcontext from "../../contextApi/cartcontext";
 import { useContext } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// css import
+import "./productdetails.css"
+// components import
+import { addProductToCart, productDetails } from "../../apis/fakestoreApi";
+import cartcontext from "../../contextApi/cartcontext";
+import usercontext from "../../contextApi/usercontext"
 
 function ProductDetails() {
 
     const {id} = useParams();
     const [pdDetails,setPdDetails] = useState([])
     const {cart,setCart} = useContext(cartcontext) 
+    const {user,setUser} = useContext(usercontext)
+    const userId = (user)?user.id:undefined
+    console.log(user,"user")
 
     useEffect(()=>{
       downloadProductDetails()
@@ -21,8 +27,13 @@ function ProductDetails() {
       setPdDetails(response.data)
    }
 
-   function onAddingProduct(){
-        setCart({...cart, products:[...cart.products,id]})
+  async function onAddingProduct(){
+    const response = await axios.put(addProductToCart(),{
+            userId:user.id,
+            productId:id
+         })
+console.log(response,"response")
+         setCart({...response.data})
    }
 
   return (
@@ -47,9 +58,16 @@ function ProductDetails() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="product-details-action btn btn-primary text-decoration-non" onClick={onAddingProduct}>Add to cart</div>
-                        <Link to="/cart" id="goToCartBtn" className="product-details-action btn btn-warning text-decoration-none">
+                        {
+                          (user)?<div className="product-details-action btn btn-primary text-decoration-non" onClick={onAddingProduct}>Add to cart</div>
+                        :
+                        <div className="product-details-action btn btn-primary text-decoration-non">Add to cart</div>
+                        
+                        }
+                          
+                        
+                        
+                        <Link to={`/cart/${userId}`} id="goToCartBtn" className="product-details-action btn btn-warning text-decoration-none">
                             Go to cart
                         </Link>
                     </div>

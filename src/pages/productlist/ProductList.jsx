@@ -1,10 +1,12 @@
-import Productbox from "../../components/productbox/Productbox"
-import "./productlist.css"
-import Filterproduct from "../../components/filterproduct/Filterproduct"
 import axios from "axios"
-import { getAllProducts, getParticularCategory } from "../../apis/fakestoreApi"
 import { useEffect,useState } from "react"
 import { Link, useParams } from "react-router-dom"
+// css import
+import "./productlist.css"
+// component import
+import Filterproduct from "../../components/filterproduct/Filterproduct"
+import Productbox from "../../components/productbox/Productbox"
+import { getAllProducts, getParticularCategory } from "../../apis/fakestoreApi"
 
 
 function ProductList() {
@@ -108,9 +110,9 @@ function ProductList() {
           productList.map((items)=>{
             console.log(items)
             return (
-              <>
-               <Productbox key={items?.id} id={items?.id} productImage={items?.image} name={items?.title} price={items?.price}/>
-              </> 
+            
+               <Productbox key={items.id} id={items.id} productImage={items.image} name={items.title} price={items.price}/>
+             
             )
           })
         }

@@ -1,5 +1,5 @@
-// import { Link } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
+// css import
 import "./category.css"
 
 function CategoryItem({itemName,filter=''}){

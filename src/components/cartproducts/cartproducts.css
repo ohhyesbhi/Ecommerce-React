@@ -14,7 +14,8 @@
 }
 
 .order-details-product-img img {
-    max-width: 100%;
+    width: 70%;
+    height: 85%;
 }
 
 .order-details-product-data {

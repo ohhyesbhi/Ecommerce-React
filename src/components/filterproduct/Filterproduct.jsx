@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+// css import
 import "./filterproduct.css"
-import { useRef, useState } from "react";
+
 
 function Filterproduct({clickSearch,clickFilter}) {
 
@@ -13,7 +15,6 @@ function Filterproduct({clickSearch,clickFilter}) {
     const [search,setSearch] = useState("")
 
     function handleOnClick(){
-      // console.log(maxPrice,minPrice,"filterdeproducts")
              clickSearch(search,minPrice,maxPrice)
     }
 

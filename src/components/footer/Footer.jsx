@@ -1,5 +1,4 @@
 
-
 // css imports
 import "./footer.css"
 

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+// css import
 import "./productbox.css"
 
 function Productbox({id,productImage,name,price}) {

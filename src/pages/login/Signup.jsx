@@ -1,8 +1,12 @@
-import { signUp } from "../../apis/fakestoreApi"
-import Image from "../../assets/fun-3d-illustration-cartoon-teenage-girl.jpg"
-import Auth from '../../components/auth/Auth'
 import {Link} from "react-router-dom"
 import axios from "axios"
+// image import
+import Image from "../../assets/fun-3d-illustration-cartoon-teenage-girl.jpg"
+// components import
+import Auth from '../../components/auth/Auth'
+import { signUp } from "../../apis/fakestoreApi"
+
+
 
 function Signup() {
   return (
@@ -11,7 +15,7 @@ function Signup() {
         <div className="login-wrapper" id="loginForm">
           <div className='wrapper'>
           <img src={Image} style={{ width: "55%" }} />
-          <div style={{width:"100%"}}>
+          <div >
             <h4 className="text-center">SignUp</h4>
 
             <Auth onSubmit={async(autharguments)=>{
@@ -25,8 +29,7 @@ function Signup() {
               } catch (error) {
                 console.log(error)
               }
-                    
-                      }} />
+                            }} />
             
             <div className="signup-btn text-center" id="showSignupBtn">
               <Link to="/signin" style={{color:"black"}}> Already have an Account? SignIn Here</Link>    
